@@ -10,14 +10,14 @@ public class BuildAssetBundles : MonoBehaviour
     [MenuItem("Assets/Build AssetBundles")]
     static public void BuildAllAssetBundles()
     {
-        string dir = "AssetBundles";
+        string dir =Application.dataPath + "AssetBundles";
         if (!Directory.Exists(dir))
         {
             Directory.CreateDirectory(dir);
         }
 
         BuildPipeline.BuildAssetBundles(dir, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
-        UnityEngine.Debug.Log("AssetBundle资源打包完成");
+        UnityEngine.Debug.Log("AssetBundle资源打包完成" + Application.dataPath + "/AssetBundles");
         
     }
 }
