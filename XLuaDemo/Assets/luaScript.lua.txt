@@ -1,5 +1,5 @@
 print("Version:1.5")
-xlua.private_accessbile(CS.GameScript)
+xlua.private_accessible(CS.GameScript)
 local unity = CS.UnityEngine
 
 --[[
@@ -11,18 +11,18 @@ xlua.hotfix(class, [method_name], fix)
 --]]
 -- 替换掉 GameScript 的 Update 方法
 
-xlua.hotfix(CS.GameScript,"Updata",
+xlua.hotfix(CS.GameScript,"Update",
 	function(self)
 		if unity.Input.GetMouseButtonDown(0) then
 		local go = unity.GameObject.Find("ScriptsManager")
-		loacal ab = go:GetComponent("DownLoad").assetBundle
+		local ab = go:GetComponent("DownLoad").assetBundle
 		local SphereGo = ab:LoadAsset("Sphere")
-
-		local ray = unity.Camera.main:ScreenPointToRay(Unity.Input.mousePosition)
+		print(SphereGo.name)
+		local ray = unity.Camera.main:ScreenPointToRay(unity.Input.mousePosition)
 		local flag,hit = CS.GameScript.RayFunction(ray)
 		if flag then
  		print(hit.transform.name)
-		local sphere = unity.Gameobject.Instantiate(SphereGo)
+		local sphere = unity.GameObject.Instantiate(SphereGo)
 		sphere.transform.localPosition = hit.point + unity.Vector3(0,1,0)
 		end
 	end

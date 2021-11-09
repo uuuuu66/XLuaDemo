@@ -9,7 +9,7 @@ using System;
 
 public class DownLoad : MonoBehaviour
 {
-    private string path = @"http://localhost/AssetBundles/newobj.u3d";
+    private string path = @"https://download.gushigame.cn/AssetBundles8/newobj.u3d";
     public AssetBundle assetBundle;
 
     public void StartDownLoad()
@@ -39,6 +39,8 @@ public class DownLoad : MonoBehaviour
             slider.value = 1;
             yield return new WaitForSeconds(1);
             GameObject.Find("Canvas").SetActive(false);
+
+            
         }
 
         if (www.isNetworkError || www.isHttpError)
@@ -51,11 +53,12 @@ public class DownLoad : MonoBehaviour
             TextAsset hot = assetBundle.LoadAsset<TextAsset>("luaScript.lua.txt");
 
             string newPath = Application.persistentDataPath + @"/luaScript.lua.txt";
+            
             if (!File.Exists(newPath))
             {
                 File.Create(newPath).Dispose();
             }
-
+            
             File.WriteAllText(newPath, hot.text);
             Debug.Log("下载资源成功！new path:" + newPath);
             callBack();
